@@ -14,22 +14,22 @@
 	<!----hero Section start---->
 
 	<div class="hero">
+		
 		<nav>
 			<h2 class="logo">Aima<span>Joffery</span></h2>
 			<ul>
-				<li><a href="">Home</a></li>
+				<li><a href="#Home">Home</a></li>
 				<li><a href="#about">About Us</a></li>
 				<li><a href="#service">Services</a></li>
-				<li><a href="#">Contact Us</a></li>
+				<li><a href="#Contact">Contact Us</a></li>
 			</ul>
 			<a href="#" class="btn">Subscribe</a>
 		</nav>
-
 		<div class="content">
 			<div class="right">
 				<h4>Hello, my name is</h4>
 				<h1>Aimable <span>Joffery</span></h1>
-				<h3>I'am a Frontend Developer.</h3>
+				<h3>I am a Frontend Developer.</h3>
 				<div class="newslatter">
 					<form>
 						<input type="email" name="email" id="mail" placeholder="Enter Your Email">
@@ -62,7 +62,7 @@
 	</section>
 
 	<!-----service section start----------->
-	<div class="service">
+	<div class="service" id="service">
 		<div class="title">
 			<h2>Our Services</h2>
 		</div>
@@ -107,10 +107,10 @@
 	</div>
 
 	<!------Contact Me------>
-	<div class="contact-me">
+	<div class="contact-me" id="Contact">
 		<p>Let Me Get You A Beautiful Website.</p>
 		<div class="container">
-			<form action="action_page.php">
+			<!-- <form action="action_page.php">
 		  
 			  <label for="fname">First Name</label>
 			  <input type="text" id="fname" name="firstname" placeholder="Your name..">
@@ -130,6 +130,18 @@
 		  
 			  <a class="button-two" href="#">Send Message</a>
 		  
+			</form> -->
+			<form method="post" class="reach-out" name="rechout">
+				<span class="errorMessage" id="errorName"></span>
+				<input type="text" name="fullname" placeholder="Your name">
+
+				<span class="errorMessage" id="errorEmail"></span>
+				<input type="text" name="youremail" placeholder="Your e-mail" id="youremail">
+
+				<br>
+				<span class="errorMessage" id="errorMessage"></span>
+				<textarea name="yourmessage" placeholder="Your message " cols="50" rows="5"></textarea>
+				<input type="submit" value="Send message" />
 			</form>
 		  </div>
 		  
@@ -147,5 +159,65 @@
 		</div>
 		<p class="end">&copy; CopyRight By Joffery 2023</p>
 	</footer>
+	<script>
+        const message = document.querySelector('.reach-out');
+       
+
+        
+
+        message.addEventListener('submit', (e) => {
+            e.preventDefault()
+
+            if (formValidation()) {
+                alert(" MESSAGE SENT SUCCESSFULLY !");
+                window.location.href = "#about"
+                    .then((docRef) => {
+
+                        window.location.href = "message_successfully.html"
+                        console.log("New Article Added Successfully with the ID", docRef.id)
+
+                    })
+                    .catch((error) => {
+                        console.error("Error adding document: ", error);
+                    });
+            }
+
+        });
+
+        function formValidation() {
+            let names = document.getElementById("errorName");
+            let emails = document.getElementById("errorEmail");
+            let messages = document.getElementById("errorMessage");
+            if (document.rechout.fullname.value == "") {
+                names.innerHTML = "Please provide your name!";
+                document.rechout.fullname.focus();
+                return false;
+            }
+            if (document.rechout.youremail.value == "") {
+                emails.innerHTML = "Please provide your Email!"
+                document.rechout.youremail.focus();
+                return false;
+            } else {
+                var emailID = document.getElementById("youremail").value;
+                atpos = emailID.indexOf("@");
+                dotpos = emailID.lastIndexOf(".");
+
+                if (atpos < 1 || (dotpos - atpos < 2)) {
+                    emails.innerHTML = "Incorret Email (@,.) are missing"
+                    document.rechout.youremail.focus();
+                    return false;
+
+                }
+
+            }
+            if (document.rechout.yourmessage.value == "") {
+                messages.innerHTML = "Please provide your Message or Queries! "
+                document.rechout.yourmessage.focus();
+                return false;
+            }
+            return (true);
+        }
+    </script>
+
 </body>
 </html>
